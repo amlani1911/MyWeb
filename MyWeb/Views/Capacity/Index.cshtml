@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Capacity>
+
+@{
+    ViewData["Title"] = "List of Capacities";
+}
+<div class="row">
+    <div class="col-md-4 offset-md-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Capacity_Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.Cap)</th>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <th>Actions</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Capacity_Id)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Cap)
+                        </td>
+                        <td class="align-middle">
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Capacity_Id"><i class="bi bi-pencil-square"></i>Edit</a>
+                                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Capacity_Id"><i class="bi bi-eye"></i>Details</a>
+                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Capacity_Id"><i class="bi bi-trash"></i>Delete</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div style="position:fixed; right: 600px; bottom: 65px;" class="text-white">
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <a asp-controller="Capacity" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New </a>
+    }
+</div>

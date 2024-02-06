@@ -1,0 +1,53 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Delete Category";
+}
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Delete Confirmation For @Model.CategoryName</h1>
+        </p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 offset-2">
+                    <div class="form-group text-center">
+                        <img class="border-info rounded-circle" style="max-width: 150px" id="CategoryImagePreview" />
+                    </div>
+                    <div class="form-group mt-2">
+                        <label class="control-label" asp-for="CategoryImageUrl"></label>
+                        <input class="form-control" asp-for="CategoryImageUrl" readonly />
+                        <span class="text-danger" asp-validation-for="CategoryImageUrl"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label class="control-label" asp-for="CategoryName"></label>
+                        <input class="form-control" asp-for="CategoryName" readonly />
+                        <span class="text-danger" asp-validation-for="CategoryName"></span>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <form asp-action="Delete">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <a class="btn btn-outline-success" asp-action="Index">Show All</a>
+                                </div>
+                                <div>
+                                    <input type="hidden" asp-for="Id" />
+                                    <input type="submit" value="Confirm" class="btn btn-danger" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('CategoryImagePreview');
+            output.src = $("#CategoryImageUrl").val();
+        })
+    </script>
+}
